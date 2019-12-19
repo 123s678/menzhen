@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.dao.AttrDtoDao">
+    <select id="getAttr3" resultType="attrDto">
+    SELECT attribute.id AS aid, attributedetail.id AS tid,detailname AS tname,attributename AS aname FROM attribute INNER JOIN attributedetail ON(attribute.id=attributedetail.attributeid) WHERE attributename='婚姻状况' and isvalid=1
+    </select>
+    <select id="getAttr8" resultType="attrDto">
+    SELECT attribute.id AS aid, attributedetail.id AS tid,detailname AS tname,attributename AS aname FROM attribute INNER JOIN attributedetail ON(attribute.id=attributedetail.attributeid) WHERE attributename='医保类别' and isvalid=1
+    </select>
+    <select id="getAttr20" resultType="attrDto">
+    SELECT attribute.id AS aid, attributedetail.id AS tid,detailname AS tname,attributename AS aname FROM attribute INNER JOIN attributedetail ON(attribute.id=attributedetail.attributeid) WHERE attributename='参保类型' and isvalid=1
+    </select>
+    <select id="getAttr15" resultType="attrDto">
+    SELECT attribute.id AS aid, attributedetail.id AS tid,detailname AS tname,attributename AS aname FROM attribute INNER JOIN attributedetail ON(attribute.id=attributedetail.attributeid) WHERE attributename='处方类型' and isvalid=1
+    </select>
+    <select id="getAttr16" resultType="attrDto">
+    SELECT attribute.id AS aid, attributedetail.id AS tid,detailname AS tname,attributename AS aname FROM attribute INNER JOIN attributedetail ON(attribute.id=attributedetail.attributeid) WHERE attributename='处方分类' and isvalid=1
+    </select>
+    <select id="getAttr24" resultType="attrDto">
+    SELECT attribute.id AS aid, attributedetail.id AS tid,detailname AS tname,attributename AS aname FROM attribute INNER JOIN attributedetail ON(attribute.id=attributedetail.attributeid) WHERE attributename='用药方式' and isvalid=1
+    </select>
+    <select id="getAttr25" resultType="attrDto">
+    SELECT attribute.id AS aid, attributedetail.id AS tid,detailname AS tname,attributename AS aname FROM attribute INNER JOIN attributedetail ON(attribute.id=attributedetail.attributeid) WHERE attributename='用药频率' and isvalid=1
+    </select>
+    <select id="getAttr4" resultType="attrDto">
+    SELECT attribute.id AS aid, attributedetail.id AS tid,detailname AS tname,attributename AS aname FROM attribute INNER JOIN attributedetail ON(attribute.id=attributedetail.attributeid) WHERE attributename='职务' AND isvalid=1
+    </select>
+    <select id="getAttr5" resultType="attrDto">
+    SELECT attribute.id AS aid, attributedetail.id AS tid,detailname AS tname,attributename AS aname FROM attribute INNER JOIN attributedetail ON(attribute.id=attributedetail.attributeid) WHERE attributename='职称' AND isvalid=1
+    </select>
+    <select id="getAttr1" resultType="attrDto">
+    SELECT attribute.id AS aid, attributedetail.id AS tid,detailname AS tname,attributename AS aname FROM attribute INNER JOIN attributedetail ON(attribute.id=attributedetail.attributeid) WHERE attributename='学历' AND isvalid=1
+    </select>
+    <select id="getAttr2" resultType="attrDto">
+    SELECT attribute.id AS aid, attributedetail.id AS tid,detailname AS tname,attributename AS aname FROM attribute INNER JOIN attributedetail ON(attribute.id=attributedetail.attributeid) WHERE attributename='政治面貌' AND isvalid=1
+    </select>
+    <select id="getAttr10" resultType="attrDto">
+    SELECT attribute.id AS aid, attributedetail.id AS tid,detailname AS tname,attributename AS aname FROM attribute INNER JOIN attributedetail ON(attribute.id=attributedetail.attributeid) WHERE attributename='学习专业' AND isvalid=1
+    </select>
+</mapper>

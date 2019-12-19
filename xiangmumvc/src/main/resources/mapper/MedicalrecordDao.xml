@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.dao.MedicalrecordDao">
+    <insert id="addMedical" parameterType="medicalrecord">
+        INSERT  INTO `medicalrecord`(
+        `id`,
+        `registerid`,
+        `medicalrecordcode`,
+        `medicalrecordname`,
+        `doctorid`,
+        `diseaseid`,
+        `note`,
+        `patientappeal`,
+        `medicalhistory`,
+        `physicalstatus`,
+        `primarydiagnosis`,
+        `opinion`,
+        `recordtime`,
+        `isvalid`) VALUES (
+        null,
+        #{registerid},
+        #{medicalrecordcode},
+        #{medicalrecordname},
+        #{doctorid},
+        #{diseaseid},
+        #{note},
+        #{patientappeal},
+        #{medicalhistory},
+        #{physicalstatus},
+        #{primarydiagnosis},
+        #{opinion},
+        NOW(),
+        #{isvalid})
+    </insert>
+    <update id="updMedical" parameterType="medicalrecord">
+        update medicalrecord
+        <trim prefix="set" suffix="where id=#{id}" suffixOverrides=",">
+            <if test="medicalrecordname!=null and medicalrecordname!=''">
+                medicalrecordname=#{medicalrecordname},
+            </if>
+            <if test="doctorid!=null and doctorid!=''">
+                doctorid=#{doctorid},
+            </if>
+            <if test="diseaseid!=null and diseaseid!=''">
+                diseaseid=#{diseaseid},
+            </if>
+            <if test="note!=null and note!=''">
+                note=#{note},
+            </if>
+            <if test="patientappeal!=null and patientappeal!=''">
+                patientappeal=#{patientappeal},
+            </if>
+            <if test="medicalhistory!=null and medicalhistory!=''">
+                medicalhistory=#{medicalhistory},
+            </if>
+            <if test="physicalstatus!=null and physicalstatus!=''">
+                physicalstatus=#{physicalstatus},
+            </if>
+            <if test="primarydiagnosis!=null and primarydiagnosis!=''">
+                primarydiagnosis=#{primarydiagnosis},
+            </if>
+            <if test="opinion!=null and opinion!=''">
+                opinion=#{opinion},
+            </if>
+            <if test="opinion!=null and opinion!=''">
+                opinion=#{opinion},
+            </if>
+            <if test="isvalid!=null and isvalid!=''">
+                isvalid=#{isvalid},
+            </if>
+        </trim>
+    </update>
+</mapper>

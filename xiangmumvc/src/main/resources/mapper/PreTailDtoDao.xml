@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.dao.PreTailDtoDao">
+    <select id="getAllTailList" resultType="preTailDto">
+        SELECT
+        t.`id`,-- id
+        p.`id` AS pid,-- pid
+        d.`drugname`, -- 药品名称
+        eachdosage, -- 每剂用量
+        dosagequantity, -- 剂数
+        a1.`detailname` AS forname, -- 用药方式
+        a2.`detailname` AS frename, -- 用药频率
+        medicineamount, -- 用药总量
+        t.`note` -- 备注
+        FROM prescriptiontemplatedetail
+        AS t
+        INNER JOIN prescriptiontemplate
+        AS p
+        ON(t.`prescriptiontemplateid`=p.`id`)
+        INNER JOIN drug AS d
+        ON(d.`id`=t.`drugid`)
+        INNER JOIN attributedetail AS a1
+        ON(a1.`id`=t.`medicineformid`)
+        INNER JOIN attributedetail AS a2
+        ON(a2.`id`=t.medicinefrequencyid)
+        WHERE t.`isvalid`=1 AND
+        p.`id`=#{pid}
+    </select>
+    <select id="getAllTailByIds" resultType="preTailDto" parameterType="list">
+         SELECT
+        t.`id`,-- id
+        p.`id` AS pid,-- pid
+        d.`drugname`, -- 药品名称
+        eachdosage, -- 每剂用量
+        dosagequantity, -- 剂数
+        a1.`detailname` AS forname, -- 用药方式
+        a2.`detailname` AS frename, -- 用药频率
+        medicineamount, -- 用药总量
+        t.`note` -- 备注
+        FROM prescriptiontemplatedetail
+        AS t
+        INNER JOIN prescriptiontemplate
+        AS p
+        ON(t.`prescriptiontemplateid`=p.`id`)
+        INNER JOIN drug AS d
+        ON(d.`id`=t.`drugid`)
+        INNER JOIN attributedetail AS a1
+        ON(a1.`id`=t.`medicineformid`)
+        INNER JOIN attributedetail AS a2
+        ON(a2.`id`=t.medicinefrequencyid)
+        WHERE t.`isvalid`=1 AND t.`id` IN
+        <foreach collection="list" item="ids" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </select>
+</mapper>

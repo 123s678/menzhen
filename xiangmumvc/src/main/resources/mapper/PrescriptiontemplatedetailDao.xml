@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.dao.PrescriptiontemplatedetailDao">
+    <insert id="addPrescriptiontemplatedetail" parameterType="prescriptiontemplatedetail">
+    INSERT  INTO `prescriptiontemplatedetail`(`id`,`prescriptiontemplateid`,`drugid`,`eachdosage`,`dosagequantity`,`medicineformid`,`medicinefrequencyid`,`medicineamount`,`note`,`isvalid`)
+    VALUES (NULL,#{prescriptiontemplateid},#{drugid},#{eachdosage},#{dosagequantity},#{medicineformid},#{medicinefrequencyid},#{medicineamount},#{note},1)
+    </insert>
+    <update id="upPrescriptiontemplatedetail" parameterType="prescriptiontemplatedetail">
+        update prescriptiontemplatedetail
+        <trim prefix="set" suffix="where id=#{id}" suffixOverrides=",">
+            <if test="drugid!=null and drugid!=''">
+                drugid=#{drugid},
+            </if>
+            <if test="eachdosage!=null and eachdosage!=''">
+                eachdosage=#{eachdosage},
+            </if>
+            <if test="dosagequantity!=null and dosagequantity!=''">
+                dosagequantity=#{dosagequantity},
+            </if>
+            <if test="medicineformid!=null and medicineformid!=''">
+                medicineformid=#{medicineformid},
+            </if>
+            <if test="medicinefrequencyid!=null and medicinefrequencyid!=''">
+                medicinefrequencyid=#{medicinefrequencyid},
+            </if>
+            <if test="medicineamount!=null and medicineamount!=''">
+                medicineamount=#{medicineamount},
+            </if>
+            <if test="note!=null and note!=''">
+                note=#{note},
+            </if>
+        </trim>
+    </update>
+    <delete id="delPrescriptiontemplatedetail" parameterType="int">
+        DELETE FROM prescriptiontemplatedetail WHERE id=#{id}
+    </delete>
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.dao.PrescriptiondetailDttDao">
+    <select id="getTailAll" resultType="prescriptiondetailDtt" parameterType="int">
+        SELECT
+        prescriptiondetail.id,
+        prescriptionid,
+        drug.`drugname`,
+        eachdosage,
+        dosagequantity,
+        a.`detailname`AS forname,
+        b.`detailname` AS countname,
+        medicineamount,
+        prescriptiondetail.note,
+        prescriptiondetail.`isvalid`
+        FROM prescriptiondetail
+        INNER JOIN drug
+        ON(prescriptiondetail.`drugid`=drug.`id`)
+        INNER JOIN attributedetail AS a
+        ON(a.`id`=prescriptiondetail.medicineformid)
+        INNER JOIN attributedetail AS b
+        ON(b.`id`=prescriptiondetail.`medicinefrequencyid`)
+        WHERE prescriptiondetail.`isvalid`=1
+        AND prescriptionid=#{prescriptionid}
+    </select>
+</mapper>

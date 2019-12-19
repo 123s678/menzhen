@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.dao.JurBeanDao">
+    <select id="query" resultType="jurBean">
+         SELECT juristitle.`id`,juristitle.`jurname` AS `text`
+         FROM juristitle
+        WHERE jurisid IN
+        (SELECT juris.`id` FROM juris INNER JOIN employee
+        ON(employee.`jurisid`=juris.`id`) WHERE employee.`id`=#{id})
+        AND juristitle.`pid`=#{pid}
+    </select>
+</mapper>

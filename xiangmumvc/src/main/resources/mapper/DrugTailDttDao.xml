@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.dao.DrugTailDttDao">
+    <select id="getDrugWith" resultType="drugTailDtt" parameterType="string">
+        SELECT
+        drug.`drugname`,
+        prescriptiondetail.`eachdosage`,
+        prescriptiondetail.`dosagequantity`,
+        a.`detailname` AS classname,
+        b.`detailname` AS typename,
+        prescriptiondetail.`medicineamount`,
+        drug.`ismedicare`,
+        drug.`medicareprice`,
+        drug.`inbulksellprice`,
+        prescription.prescriptioncode
+        FROM prescriptiondetail
+        INNER JOIN prescription
+        ON (prescription.`id`=prescriptiondetail.`prescriptionid`)
+        INNER JOIN drug
+        ON(drug.`id`=prescriptiondetail.`drugid`)
+        INNER JOIN attributedetail AS a
+        ON(a.`id`=prescriptiondetail.`medicineformid`)
+        INNER JOIN attributedetail AS b
+        ON(b.`id`=prescriptiondetail.`medicinefrequencyid`)
+        WHERE prescription.prescriptioncode=#{prescriptioncode}
+    </select>
+</mapper>

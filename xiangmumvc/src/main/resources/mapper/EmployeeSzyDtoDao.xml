@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.dao.EmployeeSzyDtoDao">
+    <select id="employee0" resultType="employeeSzyDto">
+    SELECT
+    employee.`employeecode`,
+    employee.`psw`,
+    employee.`employeename`,
+    juristitle.`id`,
+    juristitle.`jurname`,
+    juristitle.`pid`,
+    juristitle.`isVav`,
+    juristitle.`jurisid`,
+    juristitle.`isEne`,
+    juristitle.`isUrl`
+    FROM juristitle
+    INNER JOIN juris
+    ON(juristitle.`jurisid`=juris.`id`)
+    INNER JOIN employee
+    ON(employee.`id`=juris.`employeeid`)
+    WHERE employeecode=#{employeecode}
+    AND psw=#{psw}
+    AND pid=0
+    AND isVav=1
+    </select>
+    <select id="employeeP" resultType="employeeSzyDto">
+    SELECT
+    employee.`employeecode`,
+    employee.`psw`,
+    employee.`employeename`,
+    juristitle.`id`,
+    juristitle.`jurname`,
+    juristitle.`pid`,
+    juristitle.`isVav`,
+    juristitle.`jurisid`,
+    juristitle.`isEne`,
+    juristitle.`isUrl`
+    FROM juristitle
+    INNER JOIN juris
+    ON(juristitle.`jurisid`=juris.`id`)
+    INNER JOIN employee
+    ON(employee.`id`=juris.`employeeid`)
+    WHERE employeecode=#{employeecode}
+    AND psw=#{psw}
+    AND pid=#{pid}
+    AND isVav=1
+    </select>
+</mapper>

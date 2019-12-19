@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm1.dao.AttributedetailDao1">
+
+    <resultMap id="fds1" type="com.xm1.entity.Attributedetail1">
+        <result  column="detailname" property="detailname" jdbcType="VARCHAR"></result>
+    </resultMap>
+
+    <select id="getAtttrAll2" resultType="Attributedetail" resultMap="fds1">
+        SELECT * FROM `attribute` INNER JOIN `attributedetail` ON(attribute.`id` = attributedetail.`attributeid`) WHERE attribute.`attributename`="药品类型"
+    </select>
+</mapper>

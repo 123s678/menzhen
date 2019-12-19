@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm1.dao.DrugDao1">
+
+    <select id="getDrugAll" resultType="Drug1">
+        select * from drug
+    </select>
+    <delete id="getDrugDel" parameterType="long">
+        delete  from drug where id=#{id}
+    </delete>
+    <delete id="getDelDrugs" parameterType="long">
+        delete from drug where id in
+        <foreach collection="array" open="(" close=")" separator="," item="myid">
+            #{myid}
+        </foreach>
+    </delete>
+
+    <insert id="getDrugadd" parameterType="Drug1">
+        INSERT INTO drug (
+        `chargetypeid`,
+        `drugname`,
+        `drugcode`,
+        `medicalsciencecode`,
+        `enname`,
+        `pinyincode`,
+        `drugtypeid`,
+        `agenttypeid`,
+        `dosageunit`,
+        `unitdosage`,
+        `norms`,
+        `inbulksellprice`,
+        `ismedicare`,
+        `medicaretypeid`,
+        `medicarecode`,
+        `medicareprice`,
+        `isspecialdrug`,
+        `productiondata`,
+        `supplierid`,
+        `usestatus`,
+        `applysymptom`,
+        `mainefficacy`,
+        `inventoryquantity`,
+        `inventoryprice`,
+        `typeinpersonnelid`,
+        `typeindatetime`,
+        `alterpersonnelid`,
+        `alterdatetime`,
+        `picture`,
+        `isvalid`,
+        `remarks`,
+        `expiration`,
+        `cunrushu`
+      )
+      VALUES
+      (
+        #{chargetypeid},
+        #{drugname},
+        #{drugcode},
+        #{medicalsciencecode},
+        #{enname},
+        #{pinyincode},
+        #{drugtypeid},
+        #{agenttypeid},
+        #{dosageunit},
+        #{unitdosage},
+        #{norms},
+        #{inbulksellprice},
+        #{ismedicare},
+        #{medicaretypeid},
+        #{medicarecode},
+        #{medicareprice},
+        #{isspecialdrug},
+        #{productiondata},
+        #{supplierid},
+        #{usestatus},
+        #{applysymptom},
+        #{mainefficacy},
+        #{inventoryquantity},
+        #{inventoryprice},
+        #{typeinpersonnelid},
+        #{typeindatetime},
+        #{alterpersonnelid},
+        #{alterdatetime},
+        #{picture},
+        #{isvalid},
+        #{remarks},
+        #{expiration},
+        #{cunrushu}
+  ) ;
+    </insert>
+    <update id="getupds" parameterType="drug1">
+        UPDATE
+          drug
+        <trim prefix="set" suffix="WHERE id= #{id}" suffixOverrides=",">
+            <if test="drugname!=null and drugname!=''">
+                drugname=#{drugname},
+            </if>
+            <if test="inbulksellprice!=null and inbulksellprice!=''">
+                inbulksellprice=#{inbulksellprice},
+            </if>
+            <if test="ismedicare!=null and ismedicare!=''">
+                ismedicare=#{ismedicare},
+            </if>
+            <if test="medicaretypeid!=null and medicaretypeid!=''">
+                medicaretypeid=#{medicaretypeid},
+            </if>
+            <if test="medicareprice!=null and medicareprice!=''">
+                medicareprice=#{medicareprice},
+            </if>
+            <if test="isspecialdrug!=null and isspecialdrug!=''">
+                isspecialdrug=#{isspecialdrug},
+            </if>
+            <if test="applysymptom!=null and applysymptom!=''">
+                applysymptom=#{applysymptom},
+            </if>
+            <if test="mainefficacy!=null and mainefficacy!=''">
+                mainefficacy=#{mainefficacy},
+            </if>
+            <if test="inventoryquantity!=null and inventoryquantity!=''">
+                inventoryquantity=#{inventoryquantity},
+            </if>
+            <if test="inventoryprice!=null and inventoryprice!=''">
+                inventoryprice=#{inventoryprice},
+            </if>
+            <if test="alterdatetime!=null and alterdatetime!=''">
+                alterdatetime=#{alterdatetime},
+            </if>
+            <if test="cunrushu!=null and cunrushu!=''">
+                cunrushu=#{cunrushu},
+            </if>
+        </trim>
+    </update>
+         <!--SELECT * FROM drug where #{now}>=#{expiration}-->
+    <select id="getDrugGuoQi" resultType="drug1">
+           SELECT * FROM drug WHERE NOW()>=expiration
+    </select>
+
+    <delete id=""></delete>
+
+
+
+    <select id="getDrugMoHu" parameterType="String" resultType="drug1">
+        select  * from drug where drugname like concat("%",#{name},"%")
+    </select>
+</mapper>

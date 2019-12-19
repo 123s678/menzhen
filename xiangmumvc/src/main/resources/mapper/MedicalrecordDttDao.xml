@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.dao.MedicalrecordDttDao">
+    <select id="getMedicAll" resultType="medicalrecordDtt" parameterType="map">
+    SELECT
+    medicalrecord.`id`,
+    registercode,
+    medicalrecordcode,
+    medicalrecordname,
+    employeename,
+    diseasename,
+    medicalrecord.`note`,
+    patientappeal,
+    medicalhistory,
+    physicalstatus,
+    primarydiagnosis,
+    opinion,
+    recordtime,
+    medicalrecord.`isvalid`
+    FROM medicalrecord
+    INNER JOIN disease ON medicalrecord.`diseaseid`=disease.`id`
+    INNER JOIN employee  ON employee .`id`=medicalrecord.`doctorid`
+    INNER JOIN register ON medicalrecord.registerid=register.`id`
+    WHERE medicalrecord.`isvalid`=1
+        <if test="registercode!=null and registercode!=''">
+            AND registercode LIKE CONCAT('%',#{registercode},'%')
+        </if>
+        <if test="medicalrecordcode!=null and medicalrecordcode!=''">
+            AND medicalrecordcode LIKE CONCAT('%',#{medicalrecordcode},'%')
+        </if>
+        <if test="medicalrecordname!=null and medicalrecordname!=''">
+            AND medicalrecordname LIKE CONCAT('%',#{medicalrecordname},'%')
+        </if>
+        <if test="employeename!=null and employeename!=''">
+            AND employeename LIKE CONCAT('%',#{employeename},'%')
+        </if>
+        limit #{offset},#{limit}
+    </select>
+    <select id="getCount" resultType="int" parameterType="map">
+        SELECT
+        count(1)
+        FROM medicalrecord
+        INNER JOIN disease ON medicalrecord.`diseaseid`=disease.`id`
+        INNER JOIN employee  ON employee .`id`=medicalrecord.`doctorid`
+        INNER JOIN register ON medicalrecord.registerid=register.`id`
+        WHERE medicalrecord.`isvalid`=1
+        <if test="registercode!=null and registercode!=''">
+            AND registercode LIKE CONCAT('%',#{registercode},'%')
+        </if>
+        <if test="medicalrecordcode!=null and medicalrecordcode!=''">
+            AND medicalrecordcode LIKE CONCAT('%',#{medicalrecordcode},'%')
+        </if>
+        <if test="medicalrecordname!=null and medicalrecordname!=''">
+            AND medicalrecordname LIKE CONCAT('%',#{medicalrecordname},'%')
+        </if>
+        <if test="employeename!=null and employeename!=''">
+            AND employeename LIKE CONCAT('%',#{employeename},'%')
+        </if>
+    </select>
+</mapper>

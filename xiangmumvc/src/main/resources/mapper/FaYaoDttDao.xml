@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.dao.FaYaoDttDao">
+    <select id="getFaYao" resultType="faYaoDtt" parameterType="int">
+        SELECT drug.`id`,prescriptiondetail.`medicineamount`
+        FROM prescriptiondetail INNER JOIN drug
+        ON(drug.`id`=prescriptiondetail.`drugid`)
+        WHERE prescriptiondetail.`prescriptionid`=#{prescriptionid}
+    </select>
+    <update id="updateJn" parameterType="int">
+        UPDATE drug SET cunrushu = cunrushu - #{cunrushu} WHERE id = #{id}
+    </update>
+    <update id="updateJi" parameterType="int">
+        UPDATE drug SET cunrushu = cunrushu + #{cunrushu} WHERE id = #{id}
+    </update>
+</mapper>

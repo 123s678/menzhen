@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.dao.PrescriptionDttDao">
+    <select id="getAll" resultType="prescriptionDtt" parameterType="map">
+    SELECT
+    prescription.`id`,
+    register.registercode,
+    prescription.`prescriptioncode`,
+    prescription.`prescriptionname`,
+    employee.`employeename`,
+    a.`detailname` AS typename,
+    b.`detailname` AS classname,
+    prescription.`note`,
+    prescription.`prescriptiontime`,
+    prescription.`diagnosis`,
+    prescription.isvalid
+    FROM prescription
+    INNER JOIN register ON(prescription.`registerid`=register.`id`)
+    INNER JOIN employee ON(employee.`id`=prescription.`doctorid`)
+    INNER JOIN attributedetail AS a ON(a.`id`=prescription.prescriptiontypeid)
+    INNER JOIN attributedetail AS b ON(b.`id`=prescription.`classifyid`)
+    WHERE prescription.isvalid=1
+        <if test="registercode!=null and registercode!=''">
+           AND registercode LIKE CONCAT('%',#{registercode},'%')
+        </if>
+        <if test="prescriptioncode!=null and prescriptioncode!=''">
+            AND prescriptioncode LIKE CONCAT('%',#{prescriptioncode},'%')
+        </if>
+        <if test="prescriptionname!=null and prescriptionname!=''">
+            AND prescriptionname LIKE CONCAT('%',#{prescriptionname},'%')
+        </if>
+
+        <if test="employeename!=null and employeename!=''">
+            AND employeename LIKE CONCAT('%',#{employeename},'%')
+        </if>
+        limit #{offset},#{limit}
+    </select>
+    <select id="getCount" resultType="int" parameterType="map">
+        SELECT
+        count(1)
+        FROM prescription
+        INNER JOIN register ON(prescription.`registerid`=register.`id`)
+        INNER JOIN employee ON(employee.`id`=prescription.`doctorid`)
+        INNER JOIN attributedetail AS a ON(a.`id`=prescription.prescriptiontypeid)
+        INNER JOIN attributedetail AS b ON(b.`id`=prescription.`classifyid`)
+        WHERE prescription.isvalid=1
+        <if test="registercode!=null and registercode!=''">
+            AND registercode LIKE CONCAT('%',#{registercode},'%')
+        </if>
+        <if test="prescriptioncode!=null and prescriptioncode!=''">
+            AND prescriptioncode LIKE CONCAT('%',#{prescriptioncode},'%')
+        </if>
+        <if test="prescriptionname!=null and prescriptionname!=''">
+            AND prescriptionname LIKE CONCAT('%',#{prescriptionname},'%')
+        </if>
+
+        <if test="employeename!=null and employeename!=''">
+            AND employeename LIKE CONCAT('%',#{employeename},'%')
+        </if>
+    </select>
+</mapper>

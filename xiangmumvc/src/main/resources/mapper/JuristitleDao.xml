@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.dao.JuristitleDao">
+    <select id="newJuristitle" resultType="juristitle">
+      SELECT * FROM juristitle ORDER BY id DESC LIMIT 0,1
+   </select>
+    <insert id="addOb1" parameterType="juristitle">
+   INSERT INTO `juristitle`(`id`,`jurname`,`pid`,`isVav`,`jurisid`,`isEne`,`isUrl`) VALUES (null,'医生挂号',#{pid},1,#{jurisid},0,'/load/load1')
+   </insert>
+    <insert id="addOb2" parameterType="juristitle">
+    INSERT INTO `juristitle`(`id`,`jurname`,`pid`,`isVav`,`jurisid`,`isEne`,`isUrl`) VALUES (null,'医生工作站',#{pid},1,#{jurisid},1,'')
+   </insert>
+    <insert id="addOb3" parameterType="juristitle">
+    INSERT INTO `juristitle`(`id`,`jurname`,`pid`,`isVav`,`jurisid`,`isEne`,`isUrl`) VALUES (null,'病例模板',#{pid},1,#{jurisid},0,'/load/load2')
+   </insert>
+    <insert id="addOb4" parameterType="juristitle">
+    INSERT INTO `juristitle`(`id`,`jurname`,`pid`,`isVav`,`jurisid`,`isEne`,`isUrl`) VALUES (null,'处方模板',#{pid},1,#{jurisid},0,'/load/load3')
+   </insert>
+    <insert id="addOb5" parameterType="juristitle">
+    INSERT INTO `juristitle`(`id`,`jurname`,`pid`,`isVav`,`jurisid`,`isEne`,`isUrl`) VALUES (null,'病例',#{pid},1,#{jurisid},0,'/load/load4')
+   </insert>
+    <insert id="addOb6" parameterType="juristitle">
+    INSERT INTO `juristitle`(`id`,`jurname`,`pid`,`isVav`,`jurisid`,`isEne`,`isUrl`) VALUES (null,'处方',#{pid},1,#{jurisid},0,'/load/load5')
+   </insert>
+    <insert id="addOb7" parameterType="juristitle">
+    INSERT INTO `juristitle`(`id`,`jurname`,`pid`,`isVav`,`jurisid`,`isEne`,`isUrl`) VALUES (null,'收费标准',#{pid},1,#{jurisid},0,'/load/load6')
+   </insert>
+    <insert id="addOb8" parameterType="juristitle">
+    INSERT INTO `juristitle`(`id`,`jurname`,`pid`,`isVav`,`jurisid`,`isEne`,`isUrl`) VALUES (null,'药房管理',#{pid},1,#{jurisid},1,'')
+   </insert>
+    <insert id="addOb9" parameterType="juristitle">
+    INSERT INTO `juristitle`(`id`,`jurname`,`pid`,`isVav`,`jurisid`,`isEne`,`isUrl`) VALUES (null,'药房档案',#{pid},1,#{jurisid},0,'/load/load7')
+   </insert>
+    <insert id="addOb10" parameterType="juristitle">
+    INSERT INTO `juristitle`(`id`,`jurname`,`pid`,`isVav`,`jurisid`,`isEne`,`isUrl`) VALUES (null,'发药管理',#{pid},1,#{jurisid},0,'/load/load8')
+   </insert>
+    <insert id="addOb11" parameterType="juristitle">
+    INSERT INTO `juristitle`(`id`,`jurname`,`pid`,`isVav`,`jurisid`,`isEne`,`isUrl`) VALUES (null,'基础信息',#{pid},1,#{jurisid},1,'')
+   </insert>
+    <insert id="addOb12" parameterType="juristitle">
+    INSERT INTO `juristitle`(`id`,`jurname`,`pid`,`isVav`,`jurisid`,`isEne`,`isUrl`) VALUES (null,'挂号类别',#{pid},1,#{jurisid},0,'/load/load9')
+   </insert>
+    <insert id="addOb13" parameterType="juristitle">
+    INSERT INTO `juristitle`(`id`,`jurname`,`pid`,`isVav`,`jurisid`,`isEne`,`isUrl`) VALUES (null,'收费类别',#{pid},1,#{jurisid},0,'/load/load10')
+   </insert>
+    <insert id="addOb14" parameterType="juristitle">
+    INSERT INTO `juristitle`(`id`,`jurname`,`pid`,`isVav`,`jurisid`,`isEne`,`isUrl`) VALUES (null,'病人类别',#{pid},1,#{jurisid},0,'/load/load11')
+   </insert>
+    <insert id="addOb15" parameterType="juristitle">
+    INSERT INTO `juristitle`(`id`,`jurname`,`pid`,`isVav`,`jurisid`,`isEne`,`isUrl`) VALUES (null,'人事管理',#{pid},1,#{jurisid},0,'/load/load12')
+   </insert>
+    <insert id="addOb16" parameterType="juristitle">
+    INSERT INTO `juristitle`(`id`,`jurname`,`pid`,`isVav`,`jurisid`,`isEne`,`isUrl`) VALUES (null,'系统设置',#{pid},1,#{jurisid},1,'')
+   </insert>
+    <insert id="addOb17" parameterType="juristitle">
+    INSERT INTO `juristitle`(`id`,`jurname`,`pid`,`isVav`,`jurisid`,`isEne`,`isUrl`) VALUES (null,'使用单位',#{pid},1,#{jurisid},0,'/load/load13')
+   </insert>
+    <insert id="addOb18" parameterType="juristitle">
+    INSERT INTO `juristitle`(`id`,`jurname`,`pid`,`isVav`,`jurisid`,`isEne`,`isUrl`) VALUES (null,'资源管理',#{pid},1,#{jurisid},0,'/load/load14')
+   </insert>
+    <insert id="addOb19" parameterType="juristitle">
+    INSERT INTO `juristitle`(`id`,`jurname`,`pid`,`isVav`,`jurisid`,`isEne`,`isUrl`) VALUES (null,'角色管理',#{pid},1,#{jurisid},0,'/load/load15')
+   </insert>
+    <insert id="addOb20" parameterType="juristitle">
+    INSERT INTO `juristitle`(`id`,`jurname`,`pid`,`isVav`,`jurisid`,`isEne`,`isUrl`) VALUES (null,'数据统计',#{pid},1,#{jurisid},0,'/load/load16')
+   </insert>
+    <insert id="addOb21" parameterType="juristitle">
+    INSERT INTO `juristitle`(`id`,`jurname`,`pid`,`isVav`,`jurisid`,`isEne`,`isUrl`) VALUES (null,'权限管理',#{pid},1,#{jurisid},0,'/load/load17')
+   </insert>
+    <select id="getAllByEmployeeid" parameterType="int" resultType="juristitle">
+        SELECT * FROM juristitle WHERE juristitle.jurisid IN(SELECT id FROM juris  WHERE employeeid=#{employeeid})
+    </select>
+    <delete id="removeJuristitle" parameterType="list">
+        DELETE FROM juristitle WHERE id IN
+        <foreach collection="list" open="(" close=")" separator="," item="ids">
+            #{ids}
+        </foreach>
+    </delete>
+</mapper>

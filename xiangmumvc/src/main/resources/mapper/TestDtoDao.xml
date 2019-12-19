@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.dao.TestDtoDao">
+    <select id="query" resultType="employee">
+        SELECT id,employeecode,psw FROM employee
+    </select>
+    <select id="queryByIds" resultType="employee" parameterType="list">
+          SELECT id,employeecode,psw FROM employee where id in
+          <foreach collection="list" open="(" close=")" separator="," item="ids">
+            #{ids}
+          </foreach>
+    </select>
+    <insert id="save" parameterType="employee">
+        INSERT  INTO `employee`(`id`,`employeecode`,`employeename`,`psw`,`pinyincode`,`wubicode`,`jobtitleid`,`positionid`,`sex`,`tel`,`departmentid`,`email`,`idcard`,`address`,`birthday`,`inductiontime`,`maxeducationid`,`majorid`,`politicsstatusid`,`picture`,`note`,`isvalid`,`isoperator`,`roleid`,`jurisid`) VALUES (#{id},#{employeecode},'赵一',#{psw},'ZY',NULL,218,22,2,'456',1,'456','456','2','2016-11-02','2016-11-25 00:00:00',3,396,8,'home/hplus/img/profile_small.jpg','2',1,1,1,1)
+    </insert>
+</mapper>

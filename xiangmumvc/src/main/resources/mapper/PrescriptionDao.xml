@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.dao.PrescriptionDao">
+    <insert id="addPre" parameterType="prescription">
+        INSERT  INTO `prescription`(`id`,`registerid`,`prescriptioncode`,`prescriptionname`,`doctorid`,`prescriptiontypeid`,`classifyid`,`note`,`diagnosis`,`prescriptiontime`,`isvalid`) VALUES
+        (null,#{registerid},#{prescriptioncode},#{prescriptionname},#{doctorid},#{prescriptiontypeid},#{classifyid},#{note},#{diagnosis},NOW(),#{isvalid})
+    </insert>
+    <delete id="delPre" parameterType="int">
+        DELETE FROM prescription WHERE id=#{id}
+    </delete>
+    <select id="selectIdByCode" parameterType="string" resultType="int">
+        SELECT id FROM prescription WHERE prescriptioncode=#{prescriptioncode}
+    </select>
+    <select id="selectPrescription" parameterType="int" resultType="prescription">
+        SELECT * FROM prescription WHERE registerid=#{registerid}
+    </select>
+    <select id="selectAllPrescription" resultType="prescription">
+        SELECT * FROM prescription
+    </select>
+    <select id="selectIdByPrescriptionCode" resultType="int" parameterType="string">
+        SELECT id FROM prescription WHERE prescriptioncode=#{prescriptioncode}
+    </select>
+    <select id="selectRegisterId" resultType="int" parameterType="string">
+        SELECT registerid FROM prescription WHERE prescriptioncode=#{prescriptioncode}
+    </select>
+    <select id="getPrescriptionWith" parameterType="string" resultType="prescription">
+        SELECT * FROM prescription WHERE prescriptioncode=#{prescriptioncode}
+    </select>
+    <select id="getPrescriptionWithCount" parameterType="string" resultType="int">
+        SELECT COUNT(1) FROM prescription WHERE prescriptioncode=#{prescriptioncode}
+    </select>
+</mapper>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm2.dao.NumberDao2">
+    <select id="aa" resultType="com.xm2.pojo.Number">
+         select COUNT(1) num1,MONTH(registertime) ment from register group by MONTH(registertime)
+    </select>
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.dao.PrescriptiondetailDao">
+    <insert id="addPreTail" parameterType="prescriptiondetail">
+        INSERT  INTO `prescriptiondetail`(`id`,`prescriptionid`,`drugid`,`eachdosage`,`dosagequantity`,`medicineformid`,`medicinefrequencyid`,`medicineamount`,`note`,`isvalid`,`drugidshulian`) VALUES
+        (null,#{prescriptionid},#{drugid},#{eachdosage},#{dosagequantity},#{medicineformid},#{medicinefrequencyid},#{medicineamount},#{note},#{isvalid},'')
+    </insert>
+    <delete id="delPreTail" parameterType="int">
+        DELETE FROM prescriptiondetail WHERE prescriptionid=#{prescriptionid}
+    </delete>
+    <select id="newPrescriptionDetail" resultType="prescriptiondetail">
+        SELECT * FROM prescriptiondetail ORDER BY id DESC LIMIT 0,1
+    </select>
+    <select id="selectExt" resultType="int">
+        SELECT COUNT(1) FROM prescriptiondetail WHERE prescriptionid=#{prescriptionid} AND drugid=#{drugid}
+    </select>
+    <select id="medicineamount" resultType="prescriptiondetail">
+        SELECT * FROM prescriptiondetail WHERE prescriptionid=#{prescriptionid} AND drugid=#{drugid}
+    </select>
+    <update id="updateExt" parameterType="int">
+        UPDATE prescriptiondetail  SET medicineamount=medicineamount+#{medicineamount} where id=#{id}
+    </update>
+    <select id="getNewPrescriptiondetail" resultType="prescriptiondetail" parameterType="prescriptiondetail">
+        SELECT * FROM prescriptiondetail ORDER BY id DESC LIMIT 0,1
+    </select>
+    <select id="getNew123" resultType="prescriptiondetail" parameterType="prescriptiondetail">
+        SELECT * FROM prescriptiondetail  WHERE prescriptionid=#{prescriptionid} AND drugid=#{drugid} ORDER BY id DESC LIMIT 0,1
+    </select>
+</mapper>

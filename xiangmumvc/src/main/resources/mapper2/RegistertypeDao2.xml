@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm2.dao.RegistertypeDao2">
+    <select id="query" resultType="registertype2">
+        select * from registertype
+    </select>
+
+
+    <delete id="del" parameterType="int">
+        delete from registertype where id=#{id}
+    </delete>  
+    <delete id="dels" parameterType="long" >
+        delete  from registertype where  id in
+        <foreach collection="array" open="(" close=")" separator="," item="myid">
+            #{myid}
+        </foreach>
+    </delete>
+
+    <insert id="getadd" parameterType="registertype2">
+        insert  into `registertype`(`typecode`,`typename`,`typesum`,`note`,`isvalid`) values (#{typecode},#{typename},#{typesum},
+        #{note},#{isvalid});
+    </insert>
+
+    <update id="getdate" parameterType="registertype2">
+        update  registertype  set typecode=#{typecode},typename=#{typename},typesum=#{typesum},note=#{note},isvalid=#{isvalid}  where id=#{id}
+    </update>
+    <select id="getbyid" parameterType="int">
+        select * from registertype where id=#{id}
+    </select>
+</mapper>

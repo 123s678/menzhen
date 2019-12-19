@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.dao.RegisterDao">
+    <select id="NewRegister" resultType="string">
+        SELECT registercode FROM register ORDER BY registercode DESC LIMIT 0,1
+    </select>
+    <insert id="addRegister" parameterType="register">
+        INSERT  INTO `register`
+        (`id`,`patientid`,`registertypeid`,`registercode`,
+        `departmentid`,`doctorid`,`registersum`,`registertime`,
+        `registerstatus`,`registerpersonid`,`isvalid`,`note`)VALUES
+        (null,
+        #{patientid},
+        #{registertypeid},
+        #{registercode},
+        #{departmentid},
+        #{doctorid},
+        #{registersum}
+        ,NOW(),
+        #{registerstatus},
+        #{registerpersonid},
+        #{isvalid},
+        #{note})
+    </insert>
+    <select id="getExt" resultType="int" parameterType="string">
+        SELECT COUNT(1) FROM register WHERE registercode=#{registercode}
+    </select>
+    <select id="getOne" resultType="register" parameterType="string">
+        SELECT * FROM register WHERE registercode=#{registercode}
+    </select>
+    <update id="jiuZhen" parameterType="string">
+        UPDATE register SET registerstatus=495 WHERE  registercode=#{registercode}
+    </update>
+    <delete id="tuiHao" parameterType="string">
+        DELETE FROM register WHERE  registercode=#{registercode}
+    </delete>
+    <select id="selectGuaHaoNew" resultType="register">
+        SELECT * FROM register ORDER BY id DESC LIMIT 0,1
+    </select>
+    <select id="select497" resultType="int">
+        SELECT register.`registerstatus` FROM register WHERE id=#{id}
+    </select>
+    <update id="update499" parameterType="int">
+        UPDATE register SET registerstatus='499' WHERE id=#{id}
+    </update>
+    <update id="update496" parameterType="int">
+        UPDATE register SET registerstatus='496' WHERE id=#{id}
+    </update>
+    <select id="select496" resultType="int">
+         SELECT register.`registerstatus` FROM register WHERE id=#{id}
+    </select>
+    <update id="update497" parameterType="int">
+        UPDATE register SET registerstatus='497' WHERE id=#{id}
+    </update>
+    <update id="update498" parameterType="int">
+        UPDATE register SET registerstatus='498' WHERE id=#{id}
+    </update>
+</mapper>

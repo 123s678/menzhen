@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.dao.EmployeeDooDao">
+    <select id="getAllDoo" resultType="employeeDoo">
+        SELECT
+        employee.`id`,
+        employee.`employeecode`,
+        employee.`employeename`,
+        employee.`psw`,
+        employee.`pinyincode`,
+        a.`detailname` AS zhicheng,
+        b.`detailname` AS zhiwu,
+        employee.`sex`,
+        employee.`tel`,
+        department.`departmentname`,
+        employee.`email`,
+        employee.`idcard`,
+        employee.`address`,
+        employee.`birthday`,
+        employee.`inductiontime`,
+        c.`detailname` AS xueli,
+        d.`detailname` AS zhuanye,
+        e.`detailname` AS mianmao,
+        employee.`picture`
+        FROM employee
+        INNER JOIN attributedetail AS a
+        ON(a.`id`=employee.`jobtitleid`)
+        INNER JOIN attributedetail AS b
+        ON(b.`id`=employee.`positionid`)
+        INNER JOIN department
+        ON(department.`id`=employee.`departmentid`)
+        INNER JOIN attributedetail AS c
+        ON(c.`id`=employee.`maxeducationid`)
+        INNER JOIN attributedetail AS d
+        ON(d.`id`=employee.`majorid`)
+        INNER JOIN attributedetail AS e
+        ON(e.`id`=employee.`politicsstatusid`)
+    </select>
+</mapper>

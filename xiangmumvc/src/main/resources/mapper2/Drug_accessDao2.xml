@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm2.dao.Drug_accessDao2">
+
+    <select id="que" resultType="com.xm2.pojo.Drug_access">
+        select drug.`drugname` drugname  , COUNT(prescriptiondetail.`drugid`) drugid  ,MONTH(prescription.`prescriptiontime`) prescriptiontime from prescriptiondetail
+            inner join drug on drug.`id` = prescriptiondetail.`drugid`
+            inner join prescription on prescription.`id`=prescriptiondetail.`prescriptionid`
+            group by prescriptiondetail.`drugid`
+    </select>
+
+</mapper>

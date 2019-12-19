@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.dao.DrugDao">
+    <select id="getAll" resultType="drug">
+        SELECT * FROM drug WHERE isvalid=1
+    </select>
+    <select id="getOne" resultType="drug" parameterType="int">
+        select * from drug where id=#{id}
+    </select>
+    <select id="getWithDrug" resultType="drug" parameterType="int">
+        SELECT
+        drug.`drugname`,
+        drug.`ismedicare`,
+        drug.`medicareprice`,
+        drug.`inbulksellprice`
+        FROM prescription
+        INNER JOIN prescriptiondetail
+        ON (prescriptiondetail.`prescriptionid`=prescription.`id`)
+        INNER JOIN register
+        ON (prescription.`registerid`=register.`id`)
+        INNER JOIN drug
+        ON(drug.`id`=prescriptiondetail.`drugid`)
+        WHERE register.`id`=#{id}
+    </select>
+    <select id="getDrugShu" parameterType="List" resultType="drug">
+        SELECT * FROM drug where id in
+        <foreach collection="list" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </select>
+</mapper>

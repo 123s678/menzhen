@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.dao.PatientDttDao">
+    <select id="getAll" resultType="patientDtt">
+        SELECT
+        patient.`id`,
+        patientname,
+        sex,
+        a.`detailname` AS maritalstatusname,
+        job,
+        patienttype.`typename`,
+        age,
+        b.`detailname` AS insuretypename,
+        medicarecode,
+        tel,
+        address,
+        taboo,
+        drugallergyhistory,
+        `identity`
+        FROM patient
+        INNER JOIN attributedetail AS a
+        ON(a.`id`=patient.maritalstatusid)
+        INNER JOIN patienttype
+        ON(patienttype.`id`=patient.`patienttypeid`)
+        INNER JOIN attributedetail AS b
+        ON(b.`id`=patient.`insuretypeid`)
+    </select>
+    <select id="inWith" resultType="patientDtt" parameterType="int">
+        SELECT
+        patient.`id`,
+        patientname,
+        sex,
+        a.`detailname` AS maritalstatusname,
+        job,
+        patienttype.`typename`,
+        age,
+        b.`detailname` AS insuretypename,
+        medicarecode,
+        tel,
+        address,
+        taboo,
+        drugallergyhistory,
+        `identity`
+        FROM patient
+        INNER JOIN attributedetail AS a
+        ON(a.`id`=patient.maritalstatusid)
+        INNER JOIN patienttype
+        ON(patienttype.`id`=patient.`patienttypeid`)
+        INNER JOIN attributedetail AS b
+        ON(b.`id`=patient.`insuretypeid`)
+        WHERE patient.`id`=#{id}
+    </select>
+</mapper>

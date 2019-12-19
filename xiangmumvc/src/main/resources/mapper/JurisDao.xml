@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.dao.JurisDao">
+   <select id="getNewJuris" resultType="juris">
+       SELECT * FROM juris ORDER BY id DESC LIMIT 0,1
+   </select>
+    <insert id="addJuris" parameterType="juris">
+        INSERT  INTO `juris`(`id`,`employeeid`) VALUES (null,#{employeeid})
+    </insert>
+    <select id="selectJurisIdByEmployeeid" resultType="int" parameterType="int">
+        SELECT id FROM juris  WHERE employeeid=#{employeeid}
+    </select>
+    <delete id="removeJuris" parameterType="int">
+        DELETE FROM juris WHERE employeeid=#{employeeid}
+    </delete>
+</mapper>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.dao.EmployeeDao">
+    <select id="isEmployeeExist" resultType="int">
+    SELECT COUNT(*) FROM employee WHERE isoperator=1 AND employeecode=#{employeecode} AND psw=#{psw}
+    </select>
+    <select id="isLoadEmp" resultType="employee">
+         SELECT * FROM employee WHERE employee.employeecode=#{employeecode} AND employee.psw=#{psw}
+    </select>
+    <select id="getEmpCount" resultType="int">
+        SELECT COUNT(*) FROM employee WHERE employeecode=#{employeecode} AND psw=#{psw}
+    </select>
+    <select id="doPartSelectEmp" resultType="employee">
+        SELECT * FROM employee INNER JOIN department ON(employee.departmentid=department.id) WHERE department.id=#{id}
+    </select>
+    <select id="getAllEmployee" resultType="employee">
+        SELECT * FROM employee WHERE isvalid=1
+    </select>
+    <select id="selectAllByPwd" resultType="employee" parameterType="employee">
+        SELECT * FROM employee WHERE employeecode=#{employeecode} AND psw=#{psw}
+    </select>
+    <select id="getNewEmployee" resultType="employee">
+        SELECT * FROM employee ORDER BY id DESC LIMIT 0,1
+    </select>
+    <insert id="addEmployee" parameterType="employee">
+       INSERT  INTO `employee`(`id`,`employeecode`,`employeename`,`psw`,`pinyincode`,`wubicode`,`jobtitleid`,`positionid`,`sex`,`tel`,`departmentid`,`email`,`idcard`,`address`,`birthday`,`inductiontime`,`maxeducationid`,`majorid`,`politicsstatusid`,`picture`,`note`,`isvalid`,`isoperator`,`roleid`,`jurisid`) VALUES (NULL,#{employeecode},#{employeename},#{psw},#{pinyincode},#{wubicode},#{jobtitleid},#{positionid},#{sex},#{tel},#{departmentid},#{email},#{idcard},#{address},#{birthday},#{inductiontime},#{maxeducationid},#{majorid},#{politicsstatusid},#{picture},#{note},1,#{isoperator},#{roleid},#{jurisid})
+    </insert>
+    <delete id="removeEmployee" parameterType="int">
+        DELETE FROM employee WHERE id=#{id}
+    </delete>
+    <update id="updateEmployee" parameterType="employee">
+        update employee
+        <trim prefix="set" suffix="where id=#{id}" suffixOverrides=",">
+            <if test="employeename!=null and employeename!=''">
+                employeename=#{employeename},
+            </if>
+            <if test="psw!=null and psw!=''">
+                psw=#{psw},
+            </if>
+            <if test="employeename!=null and employeename!=''">
+                employeename=#{employeename},
+            </if>
+            <if test="jobtitleid!=null and jobtitleid!=''">
+                jobtitleid=#{jobtitleid},
+            </if>
+            <if test="positionid!=null and positionid!=''">
+                positionid=#{positionid},
+            </if>
+            <if test="picture!=null and picture!=''">
+                picture=#{picture},
+            </if>
+            <if test="roleid!=null and roleid!=''">
+                roleid=#{roleid},
+            </if>
+        </trim>
+    </update>
+</mapper>

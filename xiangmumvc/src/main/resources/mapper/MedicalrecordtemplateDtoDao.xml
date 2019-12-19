@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.dao.MedicalrecordtemplateDtoDao">
+    <select id="getMedicalDtoList" resultType="medicalrecordtemplateDto" parameterType="map">
+            SELECT
+            medicalrecordtemplate.id,
+            templatecode,
+            templatename,
+            employeename,
+            diseasename,
+            fitstatus,
+            departmentname,
+            patientappeal,
+            medicalhistory,
+            physicalstatus,
+            primarydiagnosis,
+            opinion
+            FROM medicalrecordtemplate
+            INNER JOIN employee
+            ON(medicalrecordtemplate.doctorid=employee.id)
+            INNER JOIN disease
+            ON(disease.id=medicalrecordtemplate.diseaseid)
+            INNER JOIN department
+            ON(employee.departmentid=department.id)
+            WHERE medicalrecordtemplate.isvalid=1
+        <if test="templatecode!=null and templatecode!=''">
+            and templatecode like CONCAT('%',#{templatecode},'%')
+        </if>
+        <if test="templatename!=null and templatename!=''">
+            and templatename like CONCAT('%',#{templatename},'%')
+        </if>
+        <if test="departmentname!=null and departmentname!=''">
+            and departmentname like CONCAT('%',#{departmentname},'%')
+        </if>
+        <if test="employeename!=null and employeename!=''">
+            and employeename like CONCAT('%',#{employeename},'%')
+        </if>
+        <if test="fitstatus!=null and fitstatus!=''">
+            and fitstatus like CONCAT('%',#{fitstatus},'%')
+        </if>
+        limit #{offset},#{limit}
+    </select>
+    <select id="getCount" resultType="int" parameterType="map">
+        SELECT
+        count(1)
+        FROM medicalrecordtemplate
+        INNER JOIN employee
+        ON(medicalrecordtemplate.doctorid=employee.id)
+        INNER JOIN disease
+        ON(disease.id=medicalrecordtemplate.diseaseid)
+        INNER JOIN department
+        ON(employee.departmentid=department.id)
+        WHERE medicalrecordtemplate.isvalid=1
+        <if test="templatecode!=null and templatecode!=''">
+            and templatecode like CONCAT('%',#{templatecode},'%')
+        </if>
+        <if test="templatename!=null and templatename!=''">
+            and templatename like CONCAT('%',#{templatename},'%')
+        </if>
+        <if test="departmentname!=null and departmentname!=''">
+            and departmentname like CONCAT('%',#{departmentname},'%')
+        </if>
+        <if test="employeename!=null and employeename!=''">
+            and employeename like CONCAT('%',#{employeename},'%')
+        </if>
+        <if test="fitstatus!=null and fitstatus!=''">
+            and fitstatus like CONCAT('%',#{fitstatus},'%')
+        </if>
+    </select>
+    <select id="getMecDtoOne" resultType="medicalrecordtemplateDto" parameterType="int">
+        SELECT
+        medicalrecordtemplate.id,
+        templatecode,
+        templatename,
+        employeename,
+        diseasename,
+        fitstatus,
+        departmentname,
+        patientappeal,
+        medicalhistory,
+        physicalstatus,
+        primarydiagnosis,
+        opinion
+        FROM medicalrecordtemplate
+        INNER JOIN employee ON(medicalrecordtemplate.doctorid=employee.id)
+        INNER JOIN disease ON(disease.id=medicalrecordtemplate.diseaseid)
+        INNER JOIN department ON(employee.departmentid=department.id)
+        WHERE medicalrecordtemplate.isvalid=1
+        AND medicalrecordtemplate.id=#{id}
+    </select>
+    <delete id="deleteMedical" parameterType="int">
+        DELETE FROM medicalrecordtemplate WHERE id=#{id}
+    </delete>
+    <select id="queryByIdLis" parameterType="list" resultType="medicalrecordtemplateDto">
+        SELECT
+        medicalrecordtemplate.id,
+        templatecode,
+        templatename,
+        employeename,
+        diseasename,
+        fitstatus,
+        departmentname,
+        patientappeal,
+        medicalhistory,
+        physicalstatus,
+        primarydiagnosis,
+        opinion
+        FROM medicalrecordtemplate
+        INNER JOIN employee ON(medicalrecordtemplate.doctorid=employee.id)
+        INNER JOIN disease ON(disease.id=medicalrecordtemplate.diseaseid)
+        INNER JOIN department ON(employee.departmentid=department.id)
+        WHERE medicalrecordtemplate.isvalid=1 AND medicalrecordtemplate.id in
+        <foreach collection="list" open="(" close=")" separator="," item="ids">
+            #{ids}
+        </foreach>
+
+    </select>
+</mapper>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm2.dao.ChargetypeDao2">
+  <select id="query" resultType="chargetype2">
+      select * from chargetype
+  </select>
+    <delete id="del" parameterType="int">
+        delete from chargetype where id=#{id}
+    </delete>
+    <delete id="dels" parameterType="long">
+        delete from chargetype where id in
+        <foreach collection="array" open="(" close=")" separator="," item="myid">
+            #{myid}
+        </foreach>
+    </delete>
+    <insert id="getadd" parameterType="chargetype2">
+        insert  into `chargetype`(`typecode`,`typename`,`itemmark`,`discount`,`note`,`isvalid`) values
+        (#{typecode},#{typename},#{itemmark},#{discount},#{note},#{isvalid});
+    </insert>
+    <update id="getupdate" parameterType="chargetype2">
+        update chargetype set typecode=#{typecode},typename=#{typename},itemmark=#{itemmark},discount=#{discount},note=#{note},isvalid=#{isvalid}
+        where id=#{id}
+    </update>
+</mapper>

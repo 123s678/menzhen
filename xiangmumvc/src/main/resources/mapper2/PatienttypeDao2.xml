@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm2.dao.PatienttypeDao2">
+    <select id="query" resultType="patienttype2">
+      select * from patienttype
+  </select>
+    <delete id="del" parameterType="int">
+        delete from patienttype where id=#{id}
+    </delete>
+    <delete id="dels" parameterType="long">
+        delete from patienttype where id in
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
+    <insert id="getadd" parameterType="patienttype2">
+        insert  into `patienttype`(`typecode`,`typename`,`typediscount`,`isvalid`,`note`) values
+        (#{typecode},#{typename},#{typediscount},#{isvalid},#{note});
+    </insert>
+    <update id="getupdate" parameterType="patienttype2">
+        update patienttype set typecode=#{typecode},typename=#{typename},typediscount=#{typediscount},isvalid=#{isvalid},note=#{note}
+         where id=#{id}
+    </update>
+    <select id="getmohu" parameterType="String">
+        select * from patienttype where typename like  concat('%',#{name},'%')
+    </select>
+</mapper>

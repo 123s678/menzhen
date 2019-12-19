@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm2.dao.Charge_statisticsDao2">
+    <select id="queryGroup" resultType="com.xm2.pojo.Charge_statistics">
+        select SUM(cost) as money,MONTH(chargetime) as mont  from  charge group by MONTH(chargetime)
+    </select>
+
+
+</mapper>

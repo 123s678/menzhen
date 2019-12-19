@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.dao.EmployeeDtoDao">
+    <select id="selectEmpDtoOne" resultType="employeeDto">
+    SELECT e.`id`,e.employeecode,e.`psw`,e.`roleid`,r.`rolename` FROM employee AS e INNER JOIN role AS r ON(e.`roleid`=r.`id`) WHERE employeecode=#{employeecode} AND psw=#{psw}
+    </select>
+</mapper>

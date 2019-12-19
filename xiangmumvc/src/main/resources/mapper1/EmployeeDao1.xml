@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm1.dao.EmployeeDao1">
+    <select id="isEmployeeExist" resultType="int">
+    SELECT COUNT(*) FROM employee WHERE isoperator=1 AND employeecode=#{employeecode} AND psw=#{psw}
+    </select>
+    <select id="quid" resultType="employee">
+        SELECT * FROM employee WHERE employeecode=#{employeecode} AND psw=#{psw} LIMIT 0,1
+    </select>
+</mapper>

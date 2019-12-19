@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.dao.ChargeDao">
+    <insert id="addCharge" parameterType="charge">
+        INSERT  INTO `charge`(
+        `id`,`prescriptionid`,`receiptcode`,`invoicecode`,`chargestatus`,
+        `discount`,`privilege`,`beforereceivable`,`afterreceivable`,`medicarecanpay`,
+        `cost`,`operationpersonid`,`chargetime`,`isvalid`) VALUES (
+        null,#{prescriptionid},#{receiptcode},#{invoicecode},1,
+        0,0,#{beforereceivable},#{afterreceivable},#{medicarecanpay},
+        #{cost},#{operationpersonid},now(),1)
+    </insert>
+    <select id="newReceiptcode" resultType="string">
+       SELECT receiptcode FROM charge ORDER BY receiptcode DESC LIMIT 0,1
+    </select>
+    <select id="newInvoicecode" resultType="string">
+       SELECT invoicecode FROM charge ORDER BY invoicecode DESC LIMIT 0,1
+    </select>
+    <select id="getChargeAll" resultType="charge">
+        SELECT * FROM charge
+    </select>
+    <update id="updateCharge2" parameterType="string">
+        UPDATE charge SET charge.`chargestatus`=2 WHERE charge.`receiptcode`=#{receiptcode}
+    </update>
+    <select id="selectIf2" resultType="int">
+        SELECT charge.`chargestatus` FROM charge
+        INNER JOIN prescription ON(prescription.`id`=charge.`prescriptionid`)
+        WHERE prescription.`prescriptioncode`=#{prescriptioncode}
+    </select>
+</mapper>

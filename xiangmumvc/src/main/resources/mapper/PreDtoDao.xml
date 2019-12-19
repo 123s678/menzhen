@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.dao.PreDtoDao">
+    <select id="getAllPreList" resultType="preDto" parameterType="map">
+        SELECT pre.`id`,
+        employeename,
+        templatename,
+        a.`detailname` AS typename,
+        b.`detailname` AS classname,
+        diagnosis,
+        pre.`note`
+        FROM prescriptiontemplate AS pre
+        INNER JOIN employee AS em
+        ON(em.`id`=pre.`doctorid`)
+        INNER JOIN attributedetail AS a
+        ON(a.`id`=pre.`prescriptiontypeid`)
+        INNER JOIN attributedetail AS b
+        ON(b.`id`=pre.`classifyid`)
+        WHERE pre.`isvalid`=1
+        <if test="employeename!=null and employeename!=''">
+            AND employeename LIKE CONCAT('%',#{employeename},'%')
+        </if>
+        <if test="templatename!=null and templatename!=''">
+            AND templatename LIKE CONCAT('%',#{templatename},'%')
+        </if>
+        limit #{offset},#{limit}
+    </select>
+    <select id="getCount" resultType="int" parameterType="map">
+        SELECT
+        count(1)
+        FROM prescriptiontemplate AS pre
+        INNER JOIN employee AS em
+        ON(em.`id`=pre.`doctorid`)
+        INNER JOIN attributedetail AS a
+        ON(a.`id`=pre.`prescriptiontypeid`)
+        INNER JOIN attributedetail AS b
+        ON(b.`id`=pre.`classifyid`)
+        WHERE pre.`isvalid`=1
+        <if test="employeename!=null and employeename!=''">
+            AND employeename LIKE CONCAT('%',#{employeename},'%')
+        </if>
+        <if test="templatename!=null and templatename!=''">
+            AND templatename LIKE CONCAT('%',#{templatename},'%')
+        </if>
+    </select>
+</mapper>
